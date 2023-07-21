@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>تسجيل الدخول</title>
+</head>
+
+<body dir="rtl">
+    <header>
+        <h2 class="logo container">المنظم</h2>
+    </header>
+
+    <!-- CONTENT START -->
+
+    <div class="cont" dir="ltr">
+        <form id="login" class="login-box">
+            <h2>تسجيل الدخول</h2>
+            <label>البريد</label>
+            <input class="email form-field" placeholder="example@example.com" type="Email" />
+            <label>كلمة السر</label>
+            <input placeholder="password" type="Password" class="form-field" /><button type="submit" id="loginBtn">تسجيل
+                الدخول</button>
+
+            <span class="no-account">ليس لديك حساب ؟</span>
+            <span class="no-password">نسيت كلمة المرور؟</span>
+        </form>
+
+        <form id="register" class="login-box hide dNone">
+            <h2>تسجيل جديد</h2>
+            <label>الاسم </label>
+            <input placeholder="عبدالله" class="form-field ar" />
+            <label>البريد </label>
+            <input class="email form-field" placeholder="example@example.com" type="Email" />
+
+            <label>كلمة السر </label>
+            <input placeholder="password" type="Password" class="form-field" /> <label>تأكيد كلمة السر </label>
+            <input placeholder="password" type="Password" class="form-field" /><button type="submit" id="registerBtn">تسجيل
+                جديد</button>
+
+            <span class="account"> لديك حساب ؟ </span>
+        </form>
+    </div>
+    <!-- CONTENT END -->
+
+
+    <div class="main"></div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js" type="module"></script>
+</body>
+
+</html>
