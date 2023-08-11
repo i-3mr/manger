@@ -1,24 +1,19 @@
-import { QuestionBuilder } from "./js/QuestionBuilder.js";
+import { QuestionBuilder } from "./questions/QuestionBuilder.js";
 import { createNewQuestionElement } from "./js/create-new.js";
 import { saveFormElement } from "./js/save-form.js";
+import { API } from "../api.js";
 
-export const TOKEN = localStorage.getItem("token");
-export const BASE_URL = "/api/v1";
+const token = localStorage.getItem("token");
 
 export const formId = new URLSearchParams(location.search).get("id");
 export const allQuestions = [];
 
-if (!TOKEN) location.assign("/login");
+if (!token) location.assign("/login");
 if (!formId) location.assign("/");
 
-const {
-  data: { form },
-} = await axios({
+const { form } = await API.send({
   method: "get",
-  url: `${BASE_URL}/forms/${formId}`,
-  headers: {
-    Authorization: `Bearer ${TOKEN}`,
-  },
+  url: `forms/${formId}`,
 });
 
 document.querySelector(".sub-title").textContent = `نموذج ${form.title}`;

@@ -1,6 +1,6 @@
 // create new question
 
-import { QuestionBuilder } from "./QuestionBuilder.js";
+import { QuestionBuilder } from "../questions/QuestionBuilder.js";
 
 export const createNewQuestionElement = () => {
   const container = document.createElement("div");

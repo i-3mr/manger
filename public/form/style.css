@@ -1,0 +1,18 @@
+.questions-container {
+  width: 100%;
+  max-width: 400px;
+
+  margin: 0 auto;
+}
+
+.center {
+  text-align: center;
+}
+
+.choice {
+  border-radius: 5px;
+}
+
+.field-question input{
+  width: 100%;
+}

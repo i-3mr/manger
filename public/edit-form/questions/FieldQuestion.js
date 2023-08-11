@@ -1,6 +1,9 @@
 import { Question } from "./Question.js";
 
 export class FieldQuestion extends Question {
+  static icon = `<i class="fa-solid fa-pencil"></i>`;
+  static id = "field";
+  static name = "حقل نصي"
   constructor({ count, question }) {
     super({ count, question });
 
@@ -13,6 +16,9 @@ export class FieldQuestion extends Question {
 
   render() {
     const container = this.mainContainer();
+
+    const title = container.querySelector("h2");
+    title.innerHTML = `${FieldQuestion.icon} ${title.innerHTML}`;
 
     return container;
   }

@@ -19,7 +19,7 @@ const publicFormRoutes = require("./routes/public-form");
 
 // middleware
 const errorHandlerMiddleware = require("./middleware/error-handler");
-const checkAuth = require("./middleware/check-auth");
+const checkAuth = require("./middleware/auth");
 const notFound = require("./middleware/not-found");
 
 // auth routes

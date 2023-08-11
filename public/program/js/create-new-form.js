@@ -1,7 +1,9 @@
 // create new form element
 
+import { API } from "../../api.js";
 import { customAlert } from "../../js/customAlert.js";
-import { BASE_URL, TOKEN, programId } from "../main.js";
+import { programId } from "../main.js";
+import { QuestionForm } from "./QuestionForm.js";
 
 export const createNewFormElement = () => {
   const container = document.createElement("div");
@@ -32,8 +34,11 @@ export const createNewFormElement = () => {
       btn.textContent = "جاري الإنشاء...";
 
       const data = await createNewForm(formTitle);
-      console.log(data);
-      // location.assign(`/form?id=${data.formId}`);
+
+      const formElement = QuestionForm.fromJSON(data.form);
+      formElement.renderToDOM();
+
+      container.remove();
     } catch (err) {
       customAlert(err?.response?.data?.message || err.message);
       btn.classList.remove("disabled");
@@ -44,12 +49,9 @@ export const createNewFormElement = () => {
 };
 
 const createNewForm = async (formTitle) => {
-  const { data } = await axios({
+  const data = await API.send({
     method: "POST",
-    url: `${BASE_URL}/forms`,
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
+    url: `forms`,
     data: {
       title: formTitle,
       programId,

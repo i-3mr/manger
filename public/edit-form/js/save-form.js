@@ -1,7 +1,8 @@
 // save form
 
+import { API } from "../../api.js";
 import { customAlert } from "../../js/customAlert.js";
-import { BASE_URL, TOKEN, allQuestions, formId } from "../main.js";
+import { allQuestions, formId } from "../main.js";
 
 export const saveForm = async () => {
   const changedQuestions = allQuestions.filter((question) =>
@@ -12,12 +13,9 @@ export const saveForm = async () => {
 
   if (json.length === 0) return customAlert("لا يوجد تغييرات");
   try {
-    const { data } = await axios({
+    const data = await API.send({
       method: "patch",
-      url: `${BASE_URL}/forms/${formId}`,
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
+      url: `forms/${formId}`,
       data: {
         questions: json,
       },

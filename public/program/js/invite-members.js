@@ -1,8 +1,9 @@
 // invite members
 
+import { API } from "../../api.js";
 import { customAlert } from "../../js/customAlert.js";
 import { isEmail } from "../../js/is-email.js";
-import { BASE_URL, TOKEN, programId } from "../main.js";
+import { programId } from "../main.js";
 
 export const inviteMembersELement = () => {
   const container = document.createElement("section");
@@ -37,13 +38,9 @@ export const inviteMembersELement = () => {
 
 const inviteMember = async (email) => {
   if (!isEmail(email)) throw new Error("البريد الإلكتروني غير صالح");
-
-  const { data } = await axios({
+  const data = await API.send({
     method: "post",
-    url: `${BASE_URL}/invitations`,
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
+    url: `invitations`,
     data: {
       inviteeEmail: email,
       programId,

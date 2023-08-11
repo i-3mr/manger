@@ -16,9 +16,9 @@ const schema = new mongoose.Schema(
     type: {
       type: String,
       enum: {
-        values: ["field", "multiple"],
+        values: ["field", "multiple", "phone", "email"],
         message:
-          "{VALUE} is not supported , ['field','multiple'] are supported",
+          "{VALUE} is not supported , ['field','multiple','phone', 'email'] are supported",
       },
       required: true,
     },

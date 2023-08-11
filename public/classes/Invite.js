@@ -1,5 +1,6 @@
+import { API } from "../api.js";
 import { customAlert } from "../js/customAlert.js";
-import { BASE_URL, TOKEN } from "../main.js";
+
 import { Program } from "./Program.js";
 
 export class Invite {
@@ -21,8 +22,8 @@ export class Invite {
     <h4 class="program-title invite">${this.name}</h4>
     <p class="program-owner">${this.owner}</p>
     <div class="program-btns">
-      <button class="program-btn accept-btn">قبول</button>
-      <button class="program-btn reject-btn">رفض</button>
+      <button class="secondary-btn green accept-btn">قبول</button>
+      <button class="secondary-btn red reject-btn">رفض</button>
     </div>
     `;
 
@@ -52,15 +53,11 @@ export class Invite {
     this.element.classList.add("disabled");
     this.element.querySelector(".accept-btn").textContent = "جاري القبول...";
     try {
-      await axios.patch(
-        `${BASE_URL}/invitations/${this.id}/`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-          },
-        }
-      );
+      await API.send({
+        method: "patch",
+        url: `invitations/${this.id}/`,
+      });
+
       customAlert("تم قبول الدعوة بنجاح", true);
       this.element.remove();
 
@@ -71,7 +68,7 @@ export class Invite {
       });
       document.querySelector(".programs-container").prepend(program.element);
     } catch (error) {
-      customAlert(error?.response?.data?.message || error.message, false);
+      // customAlert(error?.response?.data?.message || error.message, false);
       this.element.querySelector(".accept-btn").classList.remove("disabled");
       this.element.querySelector(".accept-btn").textContent = oldBtnText;
     }
@@ -82,13 +79,9 @@ export class Invite {
     this.element.classList.add("disabled");
     this.element.querySelector(".reject-btn").textContent = "جاري الرفض...";
     try {
-      await axios({
+      await API.send({
         method: "delete",
-        url: `${BASE_URL}/invitations/${this.id}/`,
-
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,
-        },
+        url: `invitations/${this.id}/`,
       });
       customAlert("تم رفض الدعوة بنجاح", true);
       this.element.remove();

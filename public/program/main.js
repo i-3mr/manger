@@ -1,5 +1,6 @@
 // take queries
 
+import { API } from "../api.js";
 import { Contributors } from "./js/Contributors.js";
 import { QuestionForm } from "./js/QuestionForm.js";
 import { createNewFormElement } from "./js/create-new-form.js";
@@ -8,35 +9,27 @@ import { inviteMembersELement } from "./js/invite-members.js";
 export const programId = new URLSearchParams(location.search).get("id");
 const programName = new URLSearchParams(location.search).get("name");
 
-export const BASE_URL = "/api/v1";
-export const TOKEN = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 
-if (!TOKEN) location.href = "/login";
+if (!token) location.href = "/login";
 if (!programId) location.assign("/");
 
 document.querySelector(".sub-title").textContent = `برنامج : ${programName}`;
 
 // get program data
-const program = axios({
+const program = API.send({
   method: "GET",
-  url: `${BASE_URL}/programs/${programId}`,
-  headers: {
-    Authorization: `Bearer ${TOKEN}`,
-  },
+  url: `programs/${programId}`,
 });
 
 // get forms data
-const forms = axios({
+const forms = API.send({
   method: "GET",
-  url: `${BASE_URL}/forms/?programId=${programId}`,
-  headers: {
-    Authorization: `Bearer ${TOKEN}`,
-  },
+  url: `forms/?programId=${programId}`,
 });
 
-const [programData, formsData] = await Promise.all([program, forms]).then((e) =>
-  e.map((e) => e.data)
-);
+const [programData, formsData] = await Promise.all([program, forms]);
+
 
 if (formsData.forms.length === 0) {
   document.querySelector(".grid-container").append(createNewFormElement());

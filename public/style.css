@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap");
 
-*,
-*::before,
-*::after {
+*:not(i),
+*:not(i)::before,
+*:not(i)::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -22,7 +22,7 @@
 
   --green: #288a61;
   --green-light: #288a61c3;
-  --green-lighter: #288a618f;
+  --green-lighter: #acf6d78f;
   --green-dark: #1f7a4b;
 
   --gray: #a8a8a8;
@@ -87,7 +87,7 @@ header > h2 {
 }
 
 .primary-input.invalid {
-  border: 1px solid #d32f2f !important;
+  border: 1px solid #e72525 !important;
 }
 
 .primary-btn.green {
@@ -154,7 +154,12 @@ main {
 
 .primary-btn:active,
 .secondary-btn:active {
-  scale: 0.98;
+  /* scale: 0.98; */
+}
+
+.secondary-btn.green {
+  background: #e5ffe5;
+  color: #288a61;
 }
 
 .secondary-btn.red {
@@ -176,9 +181,16 @@ main {
   box-shadow: 0 0 0 4px #ff656580;
 }
 
-.primary-btn:active {
-  scale: 0.99;
+.primary-btn.green:focus,
+.primary-btn.green:active {
+  box-shadow: 0 0 0 4px #288a6195;
 }
+
+.secondary-btn.green:focus,
+.secondary-btn.green:active {
+  box-shadow: 0 0 0 4px #288a6191;
+}
+
 
 .programs-container {
   display: flex;
@@ -227,6 +239,16 @@ main {
   }
 }
 
+.scale-active{
+  scale: 1;
+  transition: scale 0.25s ease-in-out;
+}
+
+.scale-active:active{
+  scale: 0.98;
+}
+
+
 .program-btn {
   background: var(--blue);
   color: var(--white);
@@ -247,18 +269,17 @@ main {
 
   /* box-shadow: 0 0 0 0px var(--blue-light); */
 
-  /* transition: box-shadow 0.2s ease-in-out; */
+  transition: box-shadow 0.2s ease-in-out;
 }
 
-/* .program-btn:focus {
+.program-btn:focus,
+.program-btn:active {
   box-shadow: 0 0 0 4px #6594ff95;
 
   outline: none;
   border: none;
-} */
-.program-btn:active {
-  scale: 0.99;
 }
+
 
 .program-btn > span {
   color: var(--white);
@@ -280,6 +301,13 @@ main {
 
 .new-program {
   order: -1;
+}
+
+.new-program > .program-btn:is(
+  :focus,
+  :active
+){
+  box-shadow: 0 0 0 4px #288a6195;
 }
 
 .new-program > .program-btn {
@@ -478,9 +506,6 @@ button.disabled {
   opacity: 0.5;
 }
 
-.program-btn:active {
-  scale: 0.99;
-}
 
 .program-btn > span {
   color: var(--white);
@@ -506,7 +531,8 @@ button.disabled {
   font-weight: 600;
 }
 
-.reject-btn {
+
+/* .reject-btn {
   background-color: #d32f2f;
   color: #fff;
 }
@@ -514,7 +540,7 @@ button.disabled {
 .accept-btn {
   background-color: #1f7a4b;
   color: #fff;
-}
+} */
 
 .invite.disabled {
   pointer-events: none;
@@ -630,4 +656,33 @@ button.disabled {
 
 .confirm-box.hide > .confirm-message {
   transform: scale(0.5);
+}
+
+
+form > button {
+  margin-top: 10px;
+}
+
+.note {
+  font-size: 14px;
+  color: gray;
+}
+
+.text-center {
+  text-align: center;
+}
+
+
+.primary-input.valid {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #35b47f;
+  color: #35b47f;
+  background-color: #d4ffed8f;
+}
+
+.primary-input.invalid {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #d32f2f;
+  color: #d32f2f;
+  background-color: #ffd4d4;
 }

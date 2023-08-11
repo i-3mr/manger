@@ -1,17 +1,15 @@
 // get programs from the server
 
+import { API } from "../api.js";
 import { Program } from "../classes/Program.js";
-import { BASE_URL, TOKEN } from "../main.js";
+
 import { addNewProgram } from "./add-new-program.js";
 import { customAlert } from "./customAlert.js";
 
 export const getPrograms = async () => {
-  const { data } = await axios({
+  const data = await API.send({
     method: "GET",
-    url: `${BASE_URL}/programs`,
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
+    url: `programs`,
   });
   return data;
 };

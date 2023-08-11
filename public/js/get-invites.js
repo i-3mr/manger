@@ -1,19 +1,13 @@
 // get Invites
 
+import { API } from "../api.js";
 import { Invite } from "../classes/Invite.js";
-import { BASE_URL, TOKEN } from "../main.js";
 
 export const getInvites = async () => {
-  try {
-    const { data } = await axios.get(`${BASE_URL}/invitations`, {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-    });
-    return data;
-  } catch (error) {
-    throw error;
-  }
+  return await API.send({
+    method: "get",
+    url: "invitations",
+  });
 };
 
 export const displayInvites = async () => {

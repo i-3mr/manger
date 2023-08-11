@@ -5,10 +5,6 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     msg: err.message || "Something went wrong try again later",
   };
 
-  // if (err instanceof CustomAPIError) {
-  //   return res.status(err.statusCode).json({ msg: err.message })
-  // }
-
   if (err.name === "ValidationError") {
     customError.msg = Object.values(err.errors)
       .map((item) => item.message)
@@ -24,6 +20,11 @@ const errorHandlerMiddleware = (err, req, res, next) => {
   if (err.name === "CastError") {
     customError.msg = `No item found with id : ${err.value}`;
     customError.statusCode = 404;
+  }
+
+  if (err.name === "JsonWebTokenError" || err.name === "TokenExpiredError") {
+    customError.msg = "Authentication invalid";
+    customError.statusCode = 401;
   }
 
   return res.status(customError.statusCode).json({ message: customError.msg });

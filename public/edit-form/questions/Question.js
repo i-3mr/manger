@@ -1,6 +1,7 @@
+import { API } from "../../api.js";
 import { customConfirm } from "../../js/custom-confirm.js";
 import { customAlert } from "../../js/customAlert.js";
-import { BASE_URL, TOKEN, formId } from "../main.js";
+import { allQuestions, formId } from "../main.js";
 
 // abstract class
 export class Question {
@@ -48,19 +49,18 @@ export class Question {
   async delete() {
     if (!this.id) {
       customAlert("تم حذف السؤال بنجاح", true);
+      allQuestions.splice(this.count - 1, 1);
       return this.element.remove();
     }
 
     try {
-      const { data } = await axios({
+      const data = await API.send({
         method: "DELETE",
-        url: `${BASE_URL}/forms/${formId}/questions/${this.id}`,
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,
-        },
+        url: `forms/${formId}/questions/${this.id}`,
       });
 
       customAlert(data.message, true);
+      allQuestions.splice(this.count - 1, 1);
       this.element.remove();
     } catch (error) {
       customAlert(error?.response?.data?.message || error.message, false);

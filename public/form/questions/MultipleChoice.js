@@ -1,8 +1,8 @@
 export class MultipleChoice {
-  constructor({ question, choices, _id }) {
-    this.id = _id;
+  constructor({ question }) {
+    this.id = question._id;
     this.question = question;
-    this.choices = choices;
+    this.choices = question.choices;
     this.answer = null;
 
     this.element = this.render();
@@ -10,7 +10,7 @@ export class MultipleChoice {
 
   render() {
     const container = document.createElement("div");
-    container.className = "multiple-question question";
+    container.className = "multiple-question question-container";
 
     container.innerHTML = `
       <h3 class="question-title">${this.question.title}</h3>
@@ -26,11 +26,11 @@ export class MultipleChoice {
 
       choiceContainer.innerHTML = `
       <span class="circle"></span>
-      <label>${choice.title}</label>
+      <label>${choice}</label>
       `;
 
       choiceContainer.addEventListener("click", () => {
-        this.#changeAnswer(choice.title);
+        this.#changeAnswer(choice);
         choicesContainer
           .querySelectorAll(".choice")
           .forEach((choice) => choice.classList.remove("selected"));

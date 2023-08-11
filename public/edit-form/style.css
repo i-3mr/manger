@@ -29,12 +29,13 @@
   height: 50px;
   min-height: 50px;
   resize: vertical;
+
 }
 
 .question-input {
   padding: 5px 10px;
   border-radius: 5px;
-  border: 1px solid #1f1f1f;
+  border: 1px solid #d5d5d5;
   font-size: 1rem;
   font-weight: 600;
   color: #1f1f1f;
@@ -126,20 +127,82 @@
 .del {
   width: 30px;
   height: 30px;
+
+  position: relative;
+  transition: scale 0.2s ease-in-out;
+
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.del > svg {
-  width: 100%;
-  fill: firebrick;
+.del:active {
+  scale: 0.9;
+}
 
-  scale: 1.5;
+.del > i {
+  color: #d30000;
 }
 
 .types-container {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
   gap: 10px;
+}
+
+.type-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  justify-content: start;
+  gap: 15px;
+}
+
+.question-title {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 15px;
+}
+
+.question-title i {
+  font-size: 1.5rem;
+  color: #6e6e6e52;
+}
+
+
+
+.delete-icon {
+  --color:#ffe5e5;
+  width: 20px;
+  height: 20px;
+
+  background: var(--color);
+  color: #d30000;
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  padding-bottom: 4px;
+  padding-right: 2.2px;
+}
+
+.delete-icon::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  left: 0;
+  bottom: 0;
+
+
+  transform: translateX(-100%);
+  border: 10px solid transparent;
+  border-right-color: var(--color);
 }

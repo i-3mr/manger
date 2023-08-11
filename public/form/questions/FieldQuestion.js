@@ -1,5 +1,6 @@
 export class FieldQuestion {
   constructor({ question }) {
+    this.id = question._id;
     this.question = question;
     this.answer = null;
 
@@ -8,7 +9,7 @@ export class FieldQuestion {
 
   render() {
     const container = document.createElement("div");
-    container.className = "field-question question";
+    container.className = "field-question question-container";
 
     container.innerHTML = `
       <h3 class="question-title">${this.question.title}</h3>

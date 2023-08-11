@@ -1,9 +1,9 @@
 // add new program function
 
-import { BASE_URL, TOKEN } from "../main.js";
+
 import { Program } from "../classes/Program.js";
 import { customAlert } from "./customAlert.js";
-import { getPrograms } from "./get-programs.js";
+import { API } from "../api.js";
 
 export const addNewProgram = async () => {
   const container = document.createElement("div");
@@ -78,12 +78,10 @@ const sendNewProgram = async (programForm) => {
     throw new Error("يرجى إدخال اسم البرنامج");
   }
 
-  const { data } = await axios({
+  const data = await API.send({
     method: "POST",
-    url: `${BASE_URL}/programs`,
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
+    url: `programs`,
+
     data: {
       name,
     },

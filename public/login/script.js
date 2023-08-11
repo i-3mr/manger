@@ -1,7 +1,6 @@
+import { API } from "../api.js";
 import { customAlert } from "../js/customAlert.js";
 import { isEmail } from "../js/is-email.js";
-
-const BASE_URL = "/api/v1";
 
 const toUrl = location.hash?.slice(1) || "";
 
@@ -52,9 +51,9 @@ loginBox.addEventListener("submit", async (e) => {
   } else {
     // * Valid Data
     try {
-      const { data } = await axios({
+      const data = await API.send({
         method: "post",
-        url: `${BASE_URL}/auth/login`,
+        url: `auth/login`,
         data: {
           email: email.value + hostName,
           password: password.value,
@@ -98,9 +97,9 @@ registerBox.addEventListener("submit", async (e) => {
   } else {
     //* Valid Info
     try {
-      const { data } = await axios({
+      const data = await API.send({
         method: "post",
-        url: `${BASE_URL}/auth/register`,
+        url: `auth/register`,
         data: {
           name: name.value,
           email: email.value + hostName,
@@ -147,9 +146,9 @@ function emailSection(email) {
       return customAlert("يجب أن يحتوي الرمز على الأقل على ٦ أرقام");
 
     try {
-      const { data } = await axios({
+      const data = await API.send({
         method: "post",
-        url: `${BASE_URL}/auth/ver`,
+        url: `auth/ver`,
         data: {
           otp: input.value.trim(),
           email,
@@ -183,9 +182,9 @@ noPasswordBtn.addEventListener("click", async () => {
   btn.textContent = "إرسال";
   btn.addEventListener("click", async () => {
     try {
-      const { data } = await axios({
+      const data = await API.send({
         method: "post",
-        url: `${BASE_URL}/auth/forget-password`,
+        url: `auth/forget-password`,
         data: {
           email: document.querySelector(".email").value + "@kfupm.edu.sa",
         },
