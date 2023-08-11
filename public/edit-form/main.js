@@ -2,6 +2,8 @@ import { QuestionBuilder } from "./questions/QuestionBuilder.js";
 import { createNewQuestionElement } from "./js/create-new.js";
 import { saveFormElement } from "./js/save-form.js";
 import { API } from "../api.js";
+import { generateQRCode } from "./js/generate-qr.js";
+import { formUrlElement } from "./js/form-url-element.js";
 
 const token = localStorage.getItem("token");
 
@@ -26,3 +28,7 @@ form.questions.forEach((question) => {
 
 createNewQuestionElement();
 saveFormElement();
+
+const formUrl = `https://m.i3mr.com/form/?id=${formId}`;
+generateQRCode(formUrl);
+formUrlElement(formUrl);

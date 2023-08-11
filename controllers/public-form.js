@@ -6,7 +6,7 @@ const Question = require("../models/Question");
 const getPublicForm = async (req, res) => {
   const formId = req.params.id;
 
-  const form = await Form.findById(formId).select("questions").populate({
+  const form = await Form.findById(formId).select("questions title").populate({
     path: "questions",
     select: "title type choices",
   });

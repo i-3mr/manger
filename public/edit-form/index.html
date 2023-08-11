@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <title>Document</title>
 </head>
@@ -18,11 +19,16 @@
   <main class="container">
     <h2 class="sub-title"></h2>
 
-    <div class="questions-container"></div>
+    <div class="questions-container">
+      <div class="question-container scaling qr-code">
+        <h2 class="question-title">رابط النموذج</h2>
+        <div id="qrcode"></div>
+      </div>
+    </div>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="main.js" type="module"></script>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </body>
 
 </html>
